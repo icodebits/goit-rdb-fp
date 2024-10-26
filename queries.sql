@@ -129,6 +129,12 @@ LIMIT 10;
 
 
 -- p4 -- ********************************************************************
-
+SELECT 
+    year,
+    DATE(CONCAT(year, '-01-01')) AS first_january,      -- Атрибут з датою 1 січня відповідного року
+    CURDATE() AS current_day,                           -- Атрибут з поточною датою
+    YEAR(CURDATE()) - year AS years_diff                -- Атрибут з різницею в роках між current_day та first_january
+FROM 
+    pandemic.disease_cases;
 
 -- p5 -- ********************************************************************
