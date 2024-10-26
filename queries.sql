@@ -71,6 +71,61 @@ JOIN pandemic.locations loc ON ic.Entity = loc.entity AND ic.Code = loc.code;
 
 
 -- p3 -- ********************************************************************
+-- p3_1 --
+SELECT 
+    loc.entity,
+    loc.code,
+    AVG(dc.number_rabies) AS avg_number_rabies,
+    MIN(dc.number_rabies) AS min_number_rabies,
+    MAX(dc.number_rabies) AS max_number_rabies,
+    SUM(dc.number_rabies) AS sum_number_rabies
+FROM 
+    pandemic.disease_cases dc
+JOIN 
+    pandemic.locations loc ON dc.location_id = loc.location_id
+WHERE 
+    dc.number_rabies IS NOT NULL
+GROUP BY 
+    loc.entity, loc.code;
+
+-- p3_2 --
+SELECT 
+    loc.entity,
+    loc.code,
+    AVG(dc.number_rabies) AS avg_number_rabies,
+    MIN(dc.number_rabies) AS min_number_rabies,
+    MAX(dc.number_rabies) AS max_number_rabies,
+    SUM(dc.number_rabies) AS sum_number_rabies
+FROM 
+    pandemic.disease_cases dc
+JOIN 
+    pandemic.locations loc ON dc.location_id = loc.location_id
+WHERE 
+    dc.number_rabies IS NOT NULL
+GROUP BY 
+    loc.entity, loc.code
+ORDER BY 
+    avg_number_rabies DESC;
+
+-- p3_3 --
+SELECT 
+    loc.entity,
+    loc.code,
+    AVG(dc.number_rabies) AS avg_number_rabies,
+    MIN(dc.number_rabies) AS min_number_rabies,
+    MAX(dc.number_rabies) AS max_number_rabies,
+    SUM(dc.number_rabies) AS sum_number_rabies
+FROM 
+    pandemic.disease_cases dc
+JOIN 
+    pandemic.locations loc ON dc.location_id = loc.location_id
+WHERE 
+    dc.number_rabies IS NOT NULL
+GROUP BY 
+    loc.entity, loc.code
+ORDER BY 
+    avg_number_rabies DESC
+LIMIT 10;
 
 
 -- p4 -- ********************************************************************
