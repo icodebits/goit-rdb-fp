@@ -138,3 +138,28 @@ FROM
     pandemic.disease_cases;
 
 -- p5 -- ********************************************************************
+DELIMITER //
+
+CREATE FUNCTION year_difference(input_year INT) 
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE first_january DATE;
+    DECLARE years_diff INT;
+    
+    -- Створюємо дату на 1 січня відповідного року
+    SET first_january = DATE(CONCAT(input_year, '-01-01'));
+    
+    -- Обчислюємо різницю в роках між поточною датою і 1 січня input_year
+    SET years_diff = YEAR(CURDATE()) - YEAR(first_january);
+    
+    RETURN years_diff;
+END //
+
+DELIMITER ;
+
+SELECT
+    year,
+    year_difference(year) AS years_diff
+FROM
+    pandemic.disease_cases;
